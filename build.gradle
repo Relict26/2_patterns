@@ -1,12 +1,13 @@
 plugins {
     id 'java'
-    id "io.freefair.lombok" version "8.2.2"
 }
 
 group 'ru.netology'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 11
+
+// кодировка файлов (если используете русский язык в файлах)
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
@@ -15,13 +16,25 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
-    testImplementation 'com.codeborne:selenide:6.17.2'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    testImplementation 'com.codeborne:selenide:6.13.0'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
-    testImplementation 'io.rest-assured:rest-assured:5.3.1'
+
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.28'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+    //Подключение Rest-Assured
+    testImplementation 'io.rest-assured:rest-assured:4.3.0'
+    testImplementation 'com.google.code.gson:gson:2.8.6'
+
 }
 
 test {
     useJUnitPlatform()
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+
 }
